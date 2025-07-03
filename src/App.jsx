@@ -36,6 +36,13 @@ export default function App() {
   const performOperation = (nextOperation) => {
     const inputValue = parseFloat(display);
 
+    // Handle negative sign after another operator
+    if (nextOperation === '-' && waitingForOperand && operation && operation !== '-') {
+      setDisplay('-');
+      setWaitingForOperand(false);
+      return;
+    }
+
     if (previousValue === null) {
       setPreviousValue(inputValue);
     } else if (operation) {
